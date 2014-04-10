@@ -126,11 +126,21 @@
           ]
         });
 
+        /* Pluralizer change input noun to plural if input number is > 1
+        * input: noun, number
+        * output: string
+        */
+        function pluralizer(string, number){
+          if( number > 1) {
+            string += 's';
+          }
+          return (number + ' ' + string);
+        }
         createExample('The Pluralizer', {
           description: 'Write a function that takes two arguments, a noun \
             and a number, and returns the number and the noun in pluralized \
             form (for instance, "1 dog", "5 cats")',
-          implementation: null,
+          implementation: pluralizer,
           validation: [
             {
               input: ['dog', 1],
@@ -139,6 +149,10 @@
             {
               input: ['cat', 5],
               output: '5 cats'
+            },
+            {
+              input: ['cow', 10],
+              output: '10 cows'
             }
           ]
         });

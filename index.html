@@ -77,16 +77,51 @@
           ]
         });
 
+        /**
+        * Tender Change to returns the change in bills and coins
+        * input : number
+        * debug : console.log(value);
+        * output: object
+        */
+        function tenderChange(amount){
+          var fives = 0;
+          var ones = 0;
+          var dimes = 0;
+          var pennies;
+          //convert amount to pennies
+          pennies = amount*100;
+          // loop and subtract 500 and if > five $, then add 1 to fives
+          while(pennies > 500){
+            fives++;
+            pennies -= 500;
+          }
+          // loop and subtract 100 and if > one $, then add 1 to ones
+          while(pennies > 100){
+            ones++;
+            pennies -= 100;
+          }
+          // loop and subtract 10 and if > 10, then add 1 to dimes
+          while(pennies > 10){
+            dimes++;
+            pennies -= 10;
+          }
+          return {
+            fives: fives,
+            ones: ones,
+            dimes: dimes,
+            pennies: pennies
+          };
+        }
         createExample('Tender Change', {
           description: 'Write a function that given a dollar amount returns \
             the change in bills and coins. For instance, given \
             <code>7.23</code> it should return: \
             <pre>{ fives: 1, ones: 2, dimes: 2, pennies: 3 }</pre>',
-          implementation: null,
+          implementation: tenderChange,
           validation: [
             {
-              input: 7.23,
-              output: { fives: 1, ones: 2, dimes: 2, pennies: 5 }
+              input: 107.03,
+              output: { fives: 21, ones: 2, dimes: 0, pennies: 3 }
             }
           ]
         });
@@ -108,6 +143,10 @@
           ]
         });
 
+//string.split '1,2,3'.split(',') -> ['1', '2', '3']
+//parseInt('1994') -> number 1994
+//parseFloat('1.23') -> 1.23
+//string.sort(callback(a, b))
         var movieList = [
           'The Shawshank Redemption,1994,1043071',
           'The Godfather,1972,732416',

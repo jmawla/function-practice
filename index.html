@@ -14,6 +14,9 @@
       $(document).ready(function() {
 
         function wordCount(fragment) {
+//          if (fragment === null)
+          if (!fragment)  // more like js
+            return 0;
           return fragment.trim().split(/\s+/).length;
         }
         createExample('Word Count', {
@@ -28,14 +31,23 @@
             {
               input: '  ignore  spaces  ',
               output: 2
+            },
+            {
+              input: null,
+              output: 0
             }
           ]
         });
 
+        function reverseText(fragment) {
+          var fragmentCopy;
+          var i = fragment[length];
+
+        }
         createExample('Reverse Text', {
           description: 'Create a function that reverses the characters in \
             a string',
-          implementation: null,
+          implementation: reverseText,
           validation: [
             {
               input: 'test value',

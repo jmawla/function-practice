@@ -174,6 +174,34 @@
           'Star Wars: Episode V - The Empire Strikes Back,1980,503348'
         ];
 
+        // declare array of objects to work with
+        var movies = new Array();
+        /* movie pasing function to split values into title and sort by year
+        * input : movieList list array
+        * output : movie objects sorted by date
+        */
+        function movieParsing(movieList) {
+          console.log(movieList.length);
+          //loop into the array movieList
+          //split each element and store it in array of objects
+          for(var index=0 ; index < movieList.length ; index++) {
+            var movieArray = new Array();
+            movieArray = movieList[index].split(',');
+            var numYear;
+            var numVote;
+            numYear = parseInt(movieArray[1]);
+            numVote = parseInt(movieArray[2]);
+            movies.push({title:movieArray[0], year:numYear, vote:numVote});
+//            movies[index] = movieArray;
+//            movies[index] = movieList[index].split(',');
+//            console.log(movieArray[index]);
+          }
+          
+
+
+          //
+
+        }
         createExample('Movie Parsing', {
           description: "Given the following comma separated list of IMDb top \
             rated movies: <pre>var movieList = " +
@@ -181,7 +209,64 @@
             "</pre> create a function that splits the values into the title, \
             year, and number of votes and returns a list of movie objects \
             sorted by year.",
-          implementation: null
+          implementation: movieParsing,
+          validation: [
+            {
+              input : [ movieList ],
+              output : [
+                 {
+                  title : "The Dark Knight",
+                  year : 2008,
+                  vote : 1017508
+                },
+                {
+                  title : "The Lord of the Rings: The Return of the King",
+                  year : 2003,
+                  vote : 738931
+                },
+                {
+                  title : "Fight Club",
+                  year : 1999,
+                  vote : 791186
+                },
+                { 
+                  title : "The Shawshank Redemption",
+                  year : 1994,
+                  vote : 104307
+                },
+                {
+                  title : "Pulp Fiction",
+                  year : 1994,
+                  vote : 806431
+                },
+                {
+                  title : "Schindler's List",
+                  year : 1993,
+                  vote : 528900
+                },
+                {
+                  title : "Star Wars: Episode V - The Empire Strikes Back",
+                  year : 1980,
+                  vote : 503348
+                },
+                {
+                  title : "The Godfather: Part II",
+                  year : 1974,
+                  vote : 474640
+                },
+                { 
+                  title : "The Godfather",
+                  year : 1972,
+                  vote : 732416
+                },
+                {
+                  title : "12 Angry Men",
+                  year : 1957,
+                  vote : 255846
+                }
+             ]
+            }
+          ]
         });
       });
     </script>

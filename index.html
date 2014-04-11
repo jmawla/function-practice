@@ -115,13 +115,17 @@
         createExample('Tender Change', {
           description: 'Write a function that given a dollar amount returns \
             the change in bills and coins. For instance, given \
-            <code>7.23</code> it should return: \
-            <pre>{ fives: 1, ones: 2, dimes: 2, pennies: 3 }</pre>',
+            <code>107.23</code> it should return: \
+            <pre>{ fives: 21, ones: 2, dimes: 0, pennies: 3 }</pre>',
           implementation: tenderChange,
           validation: [
             {
               input: 107.03,
-              output: { fives: 21, ones: 2, dimes: 0, pennies: 3 }
+              output: { 
+                fives: 21, 
+                ones: 2, 
+                dimes: 0, 
+                pennies: 3 }
             }
           ]
         });
@@ -131,7 +135,8 @@
         * output: string
         */
         function pluralizer(string, number){
-          if( number > 1) {
+          // check in case string already plural
+          if( number > 1 && (string.substr(-1) !== 's')) {
             string += 's';
           }
           return (number + ' ' + string);
@@ -151,7 +156,7 @@
               output: '5 cats'
             },
             {
-              input: ['cow', 10],
+              input: ['cows', 10],
               output: '10 cows'
             }
           ]
@@ -178,7 +183,7 @@
         var movies = new Array();
         /* movie pasing function to split values into title and sort by year
         * input : movieList list array
-        * output : movie objects sorted by date
+        * output : movie array of objects sorted by date
         */
         function movieParsing(movieList) {
           console.log(movieList.length);
@@ -192,14 +197,12 @@
             numYear = parseInt(movieArray[1]);
             numVote = parseInt(movieArray[2]);
             movies.push({title:movieArray[0], year:numYear, vote:numVote});
-//            movies[index] = movieArray;
-//            movies[index] = movieList[index].split(',');
-//            console.log(movieArray[index]);
           }
-          
+          movies.sort(function(a, b) {
+            return b.year-a.year
+          } )
 
-
-          //
+        return movies;
 
         }
         createExample('Movie Parsing', {
@@ -230,9 +233,9 @@
                   vote : 791186
                 },
                 { 
-                  title : "The Shawshank Redemption",
+                  title : 'The Shawshank Redemption',
                   year : 1994,
-                  vote : 104307
+                  vote : 1043071
                 },
                 {
                   title : "Pulp Fiction",

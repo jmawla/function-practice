@@ -84,48 +84,41 @@
         * output: object
         */
         function tenderChange(amount){
-          var fives = 0;
-          var ones = 0;
-          var dimes = 0;
-          var pennies;
-          //convert amount to pennies
-          pennies = amount*100;
-          // loop and subtract 500 and if > five $, then add 1 to fives
-          while(pennies > 500){
-            fives++;
-            pennies -= 500;
-          }
-          // loop and subtract 100 and if > one $, then add 1 to ones
-          while(pennies > 100){
-            ones++;
-            pennies -= 100;
-          }
-          // loop and subtract 10 and if > 10, then add 1 to dimes
-          while(pennies > 10){
-            dimes++;
-            pennies -= 10;
-          }
-          return {
-            fives: fives,
-            ones: ones,
-            dimes: dimes,
-            pennies: pennies
+          var denominationObjs = {
+            fives: 500,
+            ones: 100,
+            dimes: 10,
+            pennies: 1
           };
+          var change = {fives: 0, ones: 0, dimes: 0, pennies: 0};
+          //convert amount to pennies
+          var pennies = amount*100;
+          // scroll thru denominationObjs values and increment values in change 
+          // accordingly then subtract amount from total pennies
+          for(var key in denominationObjs) {
+            var incrementor = 0;
+            while(pennies >= denominationObjs[key]) {
+              change[key] = ++incrementor;
+              pennies -= denominationObjs[key];
+            }
+          }
+          return change;
         }
+
         createExample('Tender Change', {
           description: 'Write a function that given a dollar amount returns \
             the change in bills and coins. For instance, given \
-            <code>107.23</code> it should return: \
-            <pre>{ fives: 21, ones: 2, dimes: 0, pennies: 3 }</pre>',
+            <code>7.27</code> it should return: \
+            <pre>{ fives: 1, ones: 2, dimes: 4, pennies: 7 }</pre>',
           implementation: tenderChange,
           validation: [
             {
-              input: 107.03,
-              output: { 
-                fives: 21, 
-                ones: 2, 
-                dimes: 0, 
-                pennies: 3 }
+              input: 0.03,
+              output: { fives: 0, ones: 0, dimes: 0, pennies: 3 }
+            },
+            {
+              input: 12.10,
+              output: { fives: 2, ones: 2, dimes: 1, pennies: 0 }
             }
           ]
         });

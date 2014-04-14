@@ -85,12 +85,15 @@
         */
         function tenderChange(amount){
           var denominationObjs = {
+            tens: 1000,
             fives: 500,
             ones: 100,
+            quarters: 25,
             dimes: 10,
+            nickels: 5,
             pennies: 1
           };
-          var change = {fives: 0, ones: 0, dimes: 0, pennies: 0};
+          var change = {tens: 0, fives: 0, ones: 0, quarters: 0, dimes: 0, nickels: 0, pennies: 0};
           //convert amount to pennies
           var pennies = amount*100;
           // scroll thru denominationObjs values and increment values in change 
@@ -108,17 +111,17 @@
         createExample('Tender Change', {
           description: 'Write a function that given a dollar amount returns \
             the change in bills and coins. For instance, given \
-            <code>7.27</code> it should return: \
-            <pre>{ fives: 1, ones: 2, dimes: 4, pennies: 7 }</pre>',
+            <code>17.27</code> it should return: \
+            <pre>{ tens: 1, fives: 1, ones: 2, dimes: 4, nickels: 0, pennies: 7 }</pre>',
           implementation: tenderChange,
           validation: [
             {
               input: 0.03,
-              output: { fives: 0, ones: 0, dimes: 0, pennies: 3 }
+              output: { tens: 0, fives: 0, ones: 0, quarters: 0, dimes: 0, nickels: 0, pennies: 3 }
             },
             {
-              input: 12.10,
-              output: { fives: 2, ones: 2, dimes: 1, pennies: 0 }
+              input: 59.55,
+              output: { tens: 5, fives: 1, ones: 4, quarters: 2, dimes: 0, nickels: 1, pennies: 0 }
             }
           ]
         });

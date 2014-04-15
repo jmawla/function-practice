@@ -49,12 +49,14 @@
           // make an empty string
           var reversed = '';
 
-          // loop backwards over the text
+          return text.split('').reverse().join('');
+
+/*          // loop backwards over the text
           for(var index = text.length - 1 ; index >= 0 ; index--){
             // append character to new text
             reversed += text[index];
           }
-          return reversed;
+          return reversed;*/
         }
 
         createExample('Reverse Text', {

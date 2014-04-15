@@ -9,7 +9,7 @@ function createExample(name, details) {
     // kind of ugly, but removes leading spaces in the body
     var functionBody = details.implementation.toString().split(/\n/);
     functionBody = _.map(functionBody, function(line) {
-      console.warn(line.replace(/^ {8}/, ''));
+//      console.warn(line.replace(/^ {8}/, ''));
       return line.replace(/^ {8}/, '');
     });
     $('<pre>')

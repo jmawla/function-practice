@@ -95,12 +95,16 @@
             nickels: 5,
             pennies: 1
           };
-          var change = {tens: 0, fives: 0, ones: 0, quarters: 0, dimes: 0, nickels: 0, pennies: 0};
+//          var change = {tens: 0, fives: 0, ones: 0, quarters: 0, dimes: 0, nickels: 0, pennies: 0};
+            var change = {};
           //convert amount to pennies
           var pennies = amount*100;
           // scroll thru denominationObjs values and increment values in change 
           // accordingly then subtract amount from total pennies
           for(var key in denominationObjs) {
+            // another way to do it 
+            //if(amount >= denominationObjs[key])
+            //{}
             var incrementor = 0;
             while(pennies >= denominationObjs[key]) {
               change[key] = ++incrementor;
@@ -119,23 +123,42 @@
           validation: [
             {
               input: 0.03,
-              output: { tens: 0, fives: 0, ones: 0, quarters: 0, dimes: 0, nickels: 0, pennies: 3 }
+              output: { pennies: 3 }
             },
             {
               input: 59.55,
-              output: { tens: 5, fives: 1, ones: 4, quarters: 2, dimes: 0, nickels: 1, pennies: 0 }
+              output: { tens: 5, fives: 1, ones: 4, quarters: 2, nickels: 1 }
+            },
+            {
+              input: 10,
+              output: { tens: 1 }
             }
           ]
         });
-
+        function endsWith(text, suffix){
+          return text.substr(text.length - suffix.length) === suffix;
+        }
         /* Pluralizer change input noun to plural if input number is > 1
         * input: noun, number
         * output: string
         */
         function pluralizer(string, number){
           // check in case string already plural
-          if( number > 1 && (string.substr(-1) !== 's')) {
-            string += 's';
+          // 
+          if(number > 1){
+            var suffix;
+            if(endsWith( string, 'ch') || endsWith(string, 'ss') ){
+              suffix = 'es';
+            }
+            else {
+              suffix = 's';
+            }
+            if(!endsWith(string, suffix)){
+              string += suffix;
+            }
+//          if( number > 1 && (string.substr(-1) !== 's')) {
+//            string += 's';
+//          }
           }
           return (number + ' ' + string);
         }
@@ -156,6 +179,14 @@
             {
               input: ['cows', 10],
               output: '10 cows'
+            },
+            {
+              input: ['glass', 2],
+              output: '2 glasses'
+            },
+            {
+              input: ['church', 3],
+              output: '3 churches'
             }
           ]
         });

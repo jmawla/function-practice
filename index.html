@@ -96,15 +96,19 @@
             pennies: 1
           };
 //          var change = {tens: 0, fives: 0, ones: 0, quarters: 0, dimes: 0, nickels: 0, pennies: 0};
-            var change = {};
+          var change = {};
           //convert amount to pennies
           var pennies = amount*100;
           // scroll thru denominationObjs values and increment values in change 
           // accordingly then subtract amount from total pennies
           for(var key in denominationObjs) {
             // another way to do it 
-            //if(amount >= denominationObjs[key])
-            //{}
+            //if(amount >= denominationObjs[key]) {
+            // then calculate change
+            //  change[key] = Math.floor(amount / denominationObjs[key]);
+            // reduce remainder by correct amount
+            // amount -= change[key] * denominationObjs[key];
+            // }
             var incrementor = 0;
             while(pennies >= denominationObjs[key]) {
               change[key] = ++incrementor;
@@ -150,9 +154,13 @@
             if(endsWith( string, 'ch') || endsWith(string, 'ss') ){
               suffix = 'es';
             }
+            else if(endsWith(string, 'x')){
+              suffix = 'en';
+            }
             else {
               suffix = 's';
             }
+            // if string doesn't end with suffix append
             if(!endsWith(string, suffix)){
               string += suffix;
             }
@@ -187,6 +195,10 @@
             {
               input: ['church', 3],
               output: '3 churches'
+            },
+            {
+              input: ['box', 4],
+              output: '4 boxen'
             }
           ]
         });
